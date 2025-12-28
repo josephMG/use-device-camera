@@ -50,11 +50,13 @@ export const CanvasCaptureButton: React.FC<Pick<ActionButtonProps, 'stream'>> = 
   };
 
   return (
-    <Button onClick={handleCapture} disabled={!stream} title="Canvas Capture (MDN)">
+    <Button onClick={handleCapture} disabled={!stream} title="Canvas Capture (MDN)" icon={
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
         <circle cx="12" cy="13" r="4" />
       </svg>
+    }>
+      Canvas
     </Button>
   );
 };
@@ -75,12 +77,14 @@ export const TakePhotoButton: React.FC<Pick<ActionButtonProps, 'imageCaptureMana
   };
 
   return (
-    <Button onClick={handleCapture} disabled={!track || !hasImageCapture} title="takePhoto()">
+    <Button onClick={handleCapture} disabled={!track || !hasImageCapture} title="takePhoto()" icon={
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
         <circle cx="12" cy="13" r="4" />
         <path d="M12 9v8M8 13h8" strokeOpacity="0.5" />
       </svg>
+    }>
+      Photo
     </Button>
   );
 };
@@ -101,12 +105,14 @@ export const FlashPhotoButton: React.FC<Pick<ActionButtonProps, 'imageCaptureMan
   };
 
   return (
-    <Button onClick={handleCapture} disabled={!track || !hasImageCapture} title="takePhoto({ flash })">
+    <Button onClick={handleCapture} disabled={!track || !hasImageCapture} title="takePhoto({ flash })" icon={
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
         <circle cx="12" cy="13" r="4" />
         <polygon points="13 2 9 7 12 7 10 12" fill="currentColor" stroke="none" transform="translate(6, -6) scale(0.8)" />
       </svg>
+    }>
+      Flash
     </Button>
   );
 };
@@ -138,12 +144,14 @@ export const GrabFrameButton: React.FC<Pick<ActionButtonProps, 'imageCaptureMana
   };
 
   return (
-    <Button onClick={handleCapture} disabled={!track || !hasImageCapture} title="grabFrame()">
+    <Button onClick={handleCapture} disabled={!track || !hasImageCapture} title="grabFrame()" icon={
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
         <circle cx="8.5" cy="8.5" r="1.5" />
         <polyline points="21 15 16 10 5 21" />
       </svg>
+    }>
+      Grab
     </Button>
   );
 };

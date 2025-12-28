@@ -20,12 +20,6 @@ function Camera({ size: propSize }: CameraProps) {
 
   useEffect(() => {
     const { width, height } = size
-    // if (height > width) {
-    //   const temp = width
-    //   width = height
-    //   height = temp
-    // }
-    // console.log(width, height)
     const K = 10
     trackManager?.applyConstraints({
       width: { ideal: width },
@@ -47,12 +41,6 @@ function Camera({ size: propSize }: CameraProps) {
     }
   }, [stream])
 
-
-  // const memoLogs = useMemo(() => {
-  //   const logString = (type: 'capabilities' | 'settings' | 'constraints', logObject: Record<string, any> = {}) => `${type}: ${JSON.stringify(logObject ?? {})}`
-  //   return [logString('capabilities', trackManager?.getCapabilities()), logString('settings', trackManager?.getSettings()), logString('constraints', trackManager?.getConstraints())].map(s => <div>{s}</div>)
-  // }, [trackManager])
-  //
 
   return (
     <div className={styles.container} style={{ ...assignInlineVars({ [styles.ratio]: size.height ? `${String((size.width / size.height) * 1)}%` : undefined }) }}>

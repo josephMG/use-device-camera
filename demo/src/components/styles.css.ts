@@ -11,7 +11,7 @@ export const container = style({
   paddingBottom: !ratio ? undefined : `${calc(ratio).toString()}`,
   '@media': {
     '(orientation: landscape)': {
-      width: '50%',
+      width: '80%',
       margin: '0 auto',
       // Override for mobile landscape (narrow height or specific width) could be added if needed,
       // but for now keeping the 50% for general landscape.
@@ -56,9 +56,9 @@ export const controlBarContainer = style({
   borderRadius: '16px',
   border: '1px solid rgba(255, 255, 255, 0.1)',
   marginTop: '16px',
-  maxWidth: '360px',
+  // maxWidth: '360px',
   width: '100%',
-  maxHeight: '80vh',
+  maxHeight: '20vh',
   overflowY: 'auto',
   color: '#ffffff',
   boxShadow: '0 4px 24px rgba(0, 0, 0, 0.4)',

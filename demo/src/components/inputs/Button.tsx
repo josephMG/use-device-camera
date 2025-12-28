@@ -8,7 +8,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<ButtonProps> = ({ children, icon, className, ...props }) => {
   return (
     <button className={`${styles.button} ${className || ''} swiper-no-swiping`} {...props}>
-      {icon || children}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {icon}
+        {children && <span style={{ fontSize: '10px', marginTop: '4px' }}>{children}</span>}
+      </div>
     </button>
   );
 };

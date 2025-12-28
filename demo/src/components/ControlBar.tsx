@@ -37,22 +37,27 @@ export default function ControlBar() {
   const trackManager = useMediaTrack();
   const capabilities = trackManager?.capabilities;
   const settings = trackManager?.settings;
-  const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('landscape');
+  const [swiperDirection, setSwiperDirection] = useState<'horizontal' | 'vertical'>('horizontal');
 
   const { stream } = useCamera(); // Get stream
   const { imageCaptureManager } = useImageCapture(); // Get imageCaptureManager
 
   useEffect(() => {
-    const checkOrientation = () => {
-      if (window.matchMedia("(orientation: portrait)").matches) {
-        setOrientation('portrait');
-      } else {
-        setOrientation('landscape');
+    const updateSwiperDirection = () => {
+      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+      // You can adjust this breakpoint as needed
+      const isMobile = window.innerWidth <= 768;
+
+      if (isPortrait || !isMobile) { // Mobile Portrait or Desktop (regardless of actual orientation)
+        setSwiperDirection('horizontal');
+      } else { // Mobile Landscape
+        setSwiperDirection('vertical');
       }
     };
-    checkOrientation();
-    window.addEventListener('resize', checkOrientation);
-    return () => window.removeEventListener('resize', checkOrientation);
+
+    updateSwiperDirection();
+    window.addEventListener('resize', updateSwiperDirection);
+    return () => window.removeEventListener('resize', updateSwiperDirection);
   }, []);
 
   if (!capabilities || !settings) {
@@ -111,7 +116,7 @@ export default function ControlBar() {
       */}
 
       <Swiper
-        direction={orientation === 'portrait' ? 'horizontal' : 'vertical'}
+        direction={swiperDirection}
         spaceBetween={20}
         slidesPerView={1}
         style={{ width: '100%', height: '100%' }}

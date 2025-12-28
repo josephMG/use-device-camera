@@ -3,3 +3,4 @@ export * from './SingleControls';
 export * from './SnapshotControl';
 export * from './RecordControl';
 export * from './common';
+export * from './JsonDebugViewer';

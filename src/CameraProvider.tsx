@@ -11,7 +11,7 @@ import {
 const CameraContext = createContext<{
   stream: MediaStream | null
   devices: MediaDeviceInfo[]
-  requestPermission: () => Promise<MediaStream | null>
+  requestPermission: (constraints?: MediaStreamConstraints) => Promise<MediaStream | null>
   loadDevices: () => Promise<MediaDeviceInfo[]>
   cameraPermissionState: PermissionState
   audioPermissionState: PermissionState
@@ -44,10 +44,10 @@ export default function CameraProvider({
   const [audioPermissionState, setAudioPermissionState]
     = useState<PermissionState>('denied')
 
-  const requestPermission = useCallback(async () => {
+  const requestPermission = useCallback(async (constraints?: MediaStreamConstraints) => {
     let stream = null
     try {
-      stream = await navigator.mediaDevices.getUserMedia(defaultConstraints)
+      stream = await navigator.mediaDevices.getUserMedia(constraints || defaultConstraints)
       setStream(stream)
     }
     catch (err) {

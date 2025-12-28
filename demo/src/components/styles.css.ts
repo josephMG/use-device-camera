@@ -114,13 +114,3 @@ export const sectionHeader = style({
   borderBottom: '1px solid rgba(255,255,255,0.1)',
   paddingBottom: '12px',
 });
-
-export const debugInfo = style({
-  fontSize: '10px',
-  color: 'rgba(255, 255, 255, 0.4)',
-  marginBottom: '8px',
-  fontFamily: 'monospace',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-});

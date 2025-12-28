@@ -23,25 +23,30 @@ import {
   LogicalSurfaceControl,
   RestrictOwnAudioControl,
   FrameRateControl,
-  FacingModeControl,
+  DeviceControl,
   ResizeModeControl,
   DisplaySurfaceControl,
   EchoCancellationControl,
   SnapshotControl,
   RecordControl,
-  ResolutionControl, 
+  ResolutionControl,
+  JsonDebugViewer,
   type TrackManager,
 } from './controls';
 import * as styles from './styles.css';
+import * as debugStyles from './debug.css';
 
 export default function ControlBar() {
   const trackManager = useMediaTrack();
   const capabilities = trackManager?.capabilities;
   const settings = trackManager?.settings;
+  const constraints = trackManager?.constraints
   const [swiperDirection, setSwiperDirection] = useState<'horizontal' | 'vertical'>('horizontal');
 
-  const { stream } = useCamera(); // Get stream
+  const { stream, devices } = useCamera(); // Get stream
   const { imageCaptureManager } = useImageCapture(); // Get imageCaptureManager
+
+  const isTest = import.meta.env.VITE_APP_ENV === 'test';
 
   useEffect(() => {
     const updateSwiperDirection = () => {
@@ -83,6 +88,7 @@ export default function ControlBar() {
       component: <RecordControl stream={stream} />,
       visible: true
     },
+    { id: 'device', component: <DeviceControl trackManager={manager} />, visible: (devices?.length ?? 0) > 0 || has('facingMode', true) },
     { id: 'focus', component: <FocusControl trackManager={manager} />, visible: has('focusMode') },
     { id: 'exposure', component: <ExposureControl trackManager={manager} />, visible: has('exposureMode') },
     { id: 'whiteBalance', component: <WhiteBalanceControl trackManager={manager} />, visible: has('whiteBalanceMode') || has('colorTemperature') },
@@ -103,7 +109,6 @@ export default function ControlBar() {
     { id: 'logicalSurface', component: <LogicalSurfaceControl trackManager={manager} />, visible: has('logicalSurface') },
     { id: 'restrictOwnAudio', component: <RestrictOwnAudioControl trackManager={manager} />, visible: has('restrictOwnAudio') },
     { id: 'frameRate', component: <FrameRateControl trackManager={manager} />, visible: has('frameRate') },
-    { id: 'facingMode', component: <FacingModeControl trackManager={manager} />, visible: has('facingMode', true) },
     { id: 'resizeMode', component: <ResizeModeControl trackManager={manager} />, visible: has('resizeMode') },
     { id: 'displaySurface', component: <DisplaySurfaceControl trackManager={manager} />, visible: has('displaySurface') },
     { id: 'echoCancellation', component: <EchoCancellationControl trackManager={manager} />, visible: has('echoCancellation') },
@@ -112,10 +117,6 @@ export default function ControlBar() {
 
   return (
     <div className={styles.controlBarContainer}>
-      {/* 
-      <div className={styles.debugInfo}>{JSON.stringify(navigator.mediaDevices.getSupportedConstraints())}</div>
-      <div className={styles.debugInfo}>{JSON.stringify(settings)}</div> 
-      */}
 
       <Swiper
         direction={swiperDirection}
@@ -136,6 +137,30 @@ export default function ControlBar() {
             </div>
           </SwiperSlide>
         ))}
+        {isTest && (
+          <>
+            <SwiperSlide style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+              <div className={debugStyles.testContainer}>
+                <JsonDebugViewer data={devices} label="Devices" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+              <div className={debugStyles.testContainer}>
+                <JsonDebugViewer data={constraints} label="Constraints" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+              <div className={debugStyles.testContainer}>
+                <JsonDebugViewer data={capabilities} label="Capabilities" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+              <div className={debugStyles.testContainer}>
+                <JsonDebugViewer data={settings} label="Settings" />
+              </div>
+            </SwiperSlide>
+          </>
+        )}
       </Swiper>
     </div>
   );

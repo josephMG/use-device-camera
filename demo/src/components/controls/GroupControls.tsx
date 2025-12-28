@@ -1,10 +1,50 @@
 import React from 'react';
+import { useCamera } from 'use-device-camera';
 import { ControlGroup, RelatedGroup } from '../inputs';
+import * as dropdownStyles from '../inputs/Dropdown.css';
 import { type TrackManager, ConstraintDropdown, ConstraintSlider } from './common';
 
 interface GroupControlProps {
   trackManager: TrackManager | null | undefined;
 }
+
+export const DeviceControl: React.FC<GroupControlProps> = ({ trackManager }) => {
+  const { devices, requestPermission, stream } = useCamera();
+  
+  const videoDevices = devices.filter(d => d.kind === 'videoinput');
+  const hasFacingMode = trackManager?.capabilities && 'facingMode' in trackManager.capabilities;
+  const currentDeviceId = stream?.getVideoTracks()[0]?.getSettings()?.deviceId ?? '';
+
+  if (videoDevices.length === 0 && !hasFacingMode) return null;
+
+  const handleDeviceChange = (deviceId: string) => {
+    requestPermission({ video: { deviceId: { exact: deviceId } }, audio: true });
+  };
+
+  return (
+    <RelatedGroup title="Video Source">
+      {videoDevices.length > 0 && (
+        <div className={dropdownStyles.wrapper}>
+          <label className={dropdownStyles.label}>Device</label>
+          <select 
+            className={dropdownStyles.select} 
+            value={currentDeviceId} 
+            onChange={e => handleDeviceChange(e.target.value)}
+          >
+             {videoDevices.map(d => (
+               <option key={d.deviceId} value={d.deviceId}>
+                 {d.label || `Camera ${d.deviceId.slice(0, 5)}...`}
+               </option>
+             ))}
+          </select>
+        </div>
+      )}
+      {hasFacingMode && (
+        <ConstraintDropdown trackManager={trackManager} capabilityKey="facingMode" />
+      )}
+    </RelatedGroup>
+  );
+};
 
 export const FocusControl: React.FC<GroupControlProps> = ({ trackManager }) => {
   const capabilities = trackManager?.capabilities

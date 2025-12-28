@@ -30,7 +30,6 @@ export const FrameRateControl: React.FC<ControlProps> = (props) => <ConstraintSl
 // I'll skip them for now to match ControlBar logic which explicitly returns null for them.
 
 // Dropdowns
-export const FacingModeControl: React.FC<ControlProps> = (props) => <ConstraintDropdown capabilityKey="facingMode" {...props} />;
 export const ResizeModeControl: React.FC<ControlProps> = (props) => <ConstraintDropdown capabilityKey="resizeMode" {...props} />;
 export const DisplaySurfaceControl: React.FC<ControlProps> = (props) => <ConstraintDropdown capabilityKey="displaySurface" {...props} />;
 export const EchoCancellationControl: React.FC<ControlProps> = (props) => <ConstraintDropdown capabilityKey="echoCancellation" {...props} />;

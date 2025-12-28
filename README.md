@@ -2,6 +2,8 @@
 
 A React hook for easy camera device integration, providing access to media streams, device enumeration, track capabilities, and image capture.
 
+> see demo: https://josephmg.github.io/use-device-camera/
+
 ## Installation
 
 ```bash

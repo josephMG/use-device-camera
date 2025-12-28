@@ -4,11 +4,12 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/use-device-camera/',
   plugins: [
     vanillaExtractPlugin(),
     react()
   ],
   server: {
-    allowedHosts: ['localhost']
+    // allowedHosts: ['localhost']
   }
 })

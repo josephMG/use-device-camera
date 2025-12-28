@@ -44,6 +44,7 @@ export const mirrored = createVar()
 export const video = style({
   width: '100%',
   height: '100%',
+  maxHeight: '80vh',
   objectFit: 'cover',
   zIndex: 0,
   transform: mirrored,

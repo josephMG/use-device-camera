@@ -26,15 +26,6 @@ export const toggleInput = style({
   opacity: 0,
   width: 0,
   height: 0,
-  ':checked + span': {
-    backgroundColor: '#4CAF50',
-  },
-  ':focus + span': {
-    boxShadow: '0 0 1px #4CAF50',
-  },
-  ':checked + span:before': {
-    transform: 'translateX(16px)',
-  },
 })
 
 export const toggleSlider = style({
@@ -57,5 +48,16 @@ export const toggleSlider = style({
     backgroundColor: 'white',
     transition: '.4s',
     borderRadius: '50%',
+  },
+  selectors: {
+    [`${toggleInput}:checked + &`]: {
+      backgroundColor: '#4CAF50',
+    },
+    [`${toggleInput}:focus + &`]: {
+      boxShadow: '0 0 1px #4CAF50',
+    },
+    [`${toggleInput}:checked + &::before`]: {
+      transform: 'translateX(16px)',
+    },
   },
 })

@@ -29,7 +29,7 @@ const Slider: React.FC<SliderProps> = ({
         max={max}
         step={step}
         value={value}
-        className={styles.slider}
+        className={`${styles.slider} swiper-no-swiping`}
         onChange={(e) => onChange(parseFloat(e.target.value))}
       />
     </div>

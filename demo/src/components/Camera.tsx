@@ -1,7 +1,7 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic'
 import { useEffect, useMemo, useRef } from 'react'
 import * as styles from './styles.css'
-import { useCamera } from 'use-device-camera'
+import { useCamera, useMediaTrack } from 'use-device-camera'
 import { ControlBar } from './' // Import ControlBar
 
 const isMirrored = false
@@ -11,7 +11,8 @@ interface CameraProps {
 }
 function Camera({ size: propSize }: CameraProps) {
   const playerRef = useRef<HTMLVideoElement>(null)
-  const { stream, trackManager } = useCamera()
+  const { stream } = useCamera()
+  const { trackManager } = useMediaTrack()
 
   const size = useMemo(() => {
     const bodySize = document.body.getBoundingClientRect()

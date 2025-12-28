@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useCameraContext } from '../CameraProvider'
+import { useCamera } from '../CameraProvider'
 
 function useImageCapture() {
-  const { stream } = useCameraContext()
+  const { stream } = useCamera()
   const [imageCaptureManager, setImageCaptureManager] = useState<ImageCapture>()
   const [photoSettings, setPhotoSettings] = useState<PhotoSettings>()
   const [photoCapabilities, setPhotoCapabilities] = useState<PhotoCapabilities>()

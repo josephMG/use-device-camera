@@ -1,7 +1,5 @@
 import React from 'react';
 import { Button, RelatedGroup } from '../inputs';
-// Removed: import { useCamera, useImageCapture, useMediaTrack } from '../../../../dist';
-// Removed: import { type TrackManager } from './common';
 
 interface ActionButtonProps {
   stream: MediaStream | null;

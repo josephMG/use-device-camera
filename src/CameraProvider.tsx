@@ -117,7 +117,7 @@ export default function CameraProvider({
   )
 }
 
-export function useCameraContext() {
+export function useCamera() {
   const context = useContext(CameraContext)
   if (!context) {
     throw new Error('Must wrapped with CameraProvider')

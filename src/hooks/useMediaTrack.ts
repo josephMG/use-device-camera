@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useCameraContext } from '../CameraProvider'
+import { useCamera } from '../CameraProvider'
 
 function useMediaTrack() {
-  const { stream } = useCameraContext()
+  const { stream } = useCamera()
   const [trackManager, setTrackManager] = useState<MediaStreamTrack>()
   const [constraints, setConstraints] = useState<MediaTrackConstraints>()
   const [settings, setSettings] = useState<MediaTrackSettings>()

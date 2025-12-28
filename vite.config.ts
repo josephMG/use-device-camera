@@ -14,15 +14,20 @@ export default defineConfig(() => ({
     lib: {
       name: 'use-device-camera',
       entry: ['src/index.ts'],
-      formats: ['es'] as LibraryFormats[],
-      external: ['node_modules/*'],
+      formats: ['es', 'cjs'] as LibraryFormats[],
     },
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: true,
     minify: true,
     rollupOptions: {
-      external: ['react', 'react/jsx-runtime'],
+      external: ['react', 'react/jsx-runtime', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
     },
   },
 }))

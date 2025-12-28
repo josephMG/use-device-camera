@@ -72,3 +72,21 @@ export const WhiteBalanceControl: React.FC<GroupControlProps> = ({ trackManager 
   );
 };
 
+export const ResolutionControl: React.FC<GroupControlProps> = ({ trackManager }) => {
+  const capabilities = trackManager?.capabilities;
+  
+  const hasHeight = capabilities && 'height' in capabilities;
+  const hasWidth = capabilities && 'width' in capabilities;
+  const hasAspectRatio = capabilities && 'aspectRatio' in capabilities;
+
+  if (!hasHeight && !hasWidth && !hasAspectRatio) return null;
+
+  return (
+    <RelatedGroup title="Resolution">
+      {hasHeight && <ConstraintSlider trackManager={trackManager} capabilityKey="height" />}
+      {hasWidth && <ConstraintSlider trackManager={trackManager} capabilityKey="width" />}
+      {hasAspectRatio && <ConstraintSlider trackManager={trackManager} capabilityKey="aspectRatio" />}
+    </RelatedGroup>
+  );
+};
+

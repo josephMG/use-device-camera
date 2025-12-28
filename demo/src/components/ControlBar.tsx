@@ -29,6 +29,7 @@ import {
   EchoCancellationControl,
   SnapshotControl,
   RecordControl,
+  ResolutionControl, 
   type TrackManager,
 } from './controls';
 import * as styles from './styles.css';
@@ -106,6 +107,7 @@ export default function ControlBar() {
     { id: 'resizeMode', component: <ResizeModeControl trackManager={manager} />, visible: has('resizeMode') },
     { id: 'displaySurface', component: <DisplaySurfaceControl trackManager={manager} />, visible: has('displaySurface') },
     { id: 'echoCancellation', component: <EchoCancellationControl trackManager={manager} />, visible: has('echoCancellation') },
+    { id: 'resolution', component: <ResolutionControl trackManager={manager} />, visible: has('height') || has('width') || has('aspectRatio') }, // New ResolutionControl
   ].filter(c => c.visible);
 
   return (

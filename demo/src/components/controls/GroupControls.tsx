@@ -18,7 +18,15 @@ export const DeviceControl: React.FC<GroupControlProps> = ({ trackManager }) => 
   if (videoDevices.length === 0 && !hasFacingMode) return null;
 
   const handleDeviceChange = (deviceId: string) => {
-    requestPermission({ video: { deviceId: { exact: deviceId } }, audio: true });
+    const settings = trackManager?.settings;
+    requestPermission({
+      video: {
+        deviceId: { exact: deviceId },
+        width: settings?.width,
+        height: settings?.height,
+      },
+      audio: true,
+    });
   };
 
   return (

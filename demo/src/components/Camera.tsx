@@ -23,8 +23,8 @@ function Camera({ size: propSize }: CameraProps) {
     const { width, height } = size
     const K = 10
     trackManager?.applyConstraints({
-      width: { ideal: width },
-      height: { ideal: height },
+      width: { ideal: width * K },
+      height: { ideal: height * K },
       advanced: [{ width: width * K, height: height * K, aspectRatio: width / height }],
     })
   }, [size, trackManager])

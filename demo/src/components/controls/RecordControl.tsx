@@ -1,11 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { Button, RelatedGroup } from '../inputs';
+import { useSwiperDirection } from '../../hooks/useSwiperDirection';
 
 interface RecordControlProps {
   stream: MediaStream | null;
 }
 
 export const RecordControl: React.FC<RecordControlProps> = ({ stream }) => {
+  const direction = useSwiperDirection();
+  const flexDirection = direction === 'vertical' ? 'column' : 'row';
   const [isRecording, setIsRecording] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
@@ -51,7 +54,7 @@ export const RecordControl: React.FC<RecordControlProps> = ({ stream }) => {
 
   return (
     <RelatedGroup title="Recording">
-      <div style={{ display: 'flex', gap: '12px', justifyContent: 'space-around', padding: '4px' }}>
+      <div style={{ display: 'flex', flexDirection, gap: '12px', justifyContent: 'center', alignItems: 'center', padding: '4px' }}>
         <Button onClick={startRecording} disabled={!stream || isRecording} title="Start Recording" icon={
            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
              <circle cx="12" cy="12" r="10" />

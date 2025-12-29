@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import { useCamera, useImageCapture, useMediaTrack } from 'use-device-camera';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useSwiperDirection } from '../hooks/useSwiperDirection';
 
 import {
   FocusControl,
@@ -41,30 +41,12 @@ export default function ControlBar() {
   const capabilities = trackManager?.capabilities;
   const settings = trackManager?.settings;
   const constraints = trackManager?.constraints
-  const [swiperDirection, setSwiperDirection] = useState<'horizontal' | 'vertical'>('horizontal');
+  const swiperDirection = useSwiperDirection();
 
   const { stream, devices } = useCamera(); // Get stream
   const { imageCaptureManager } = useImageCapture(); // Get imageCaptureManager
 
   const isTest = import.meta.env.VITE_APP_ENV === 'test';
-
-  useEffect(() => {
-    const updateSwiperDirection = () => {
-      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
-      // You can adjust this breakpoint as needed
-      const isMobile = window.innerWidth <= 768;
-
-      if (isPortrait || !isMobile) { // Mobile Portrait or Desktop (regardless of actual orientation)
-        setSwiperDirection('horizontal');
-      } else { // Mobile Landscape
-        setSwiperDirection('vertical');
-      }
-    };
-
-    updateSwiperDirection();
-    window.addEventListener('resize', updateSwiperDirection);
-    return () => window.removeEventListener('resize', updateSwiperDirection);
-  }, []);
 
   if (!capabilities || !settings) {
     return null;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, RelatedGroup } from '../inputs';
+import { useSwiperDirection } from '../../hooks/useSwiperDirection';
 
 interface ActionButtonProps {
   stream: MediaStream | null;
@@ -155,9 +156,12 @@ export const GrabFrameButton: React.FC<Pick<ActionButtonProps, 'imageCaptureMana
 };
 
 export const SnapshotControl: React.FC<ActionButtonProps> = ({stream, imageCaptureManager}) => {
+  const direction = useSwiperDirection();
+  const flexDirection = direction === 'vertical' ? 'column' : 'row';
+
   return (
     <RelatedGroup title="Snapshot">
-      <div style={{ display: 'flex', gap: '12px', justifyContent: 'space-around', padding: '4px' }}>
+      <div style={{ display: 'flex', flexDirection, gap: '12px', justifyContent: 'center', alignItems: 'center', padding: '4px' }}>
         <CanvasCaptureButton stream={stream} />
         <TakePhotoButton imageCaptureManager={imageCaptureManager} />
         <FlashPhotoButton imageCaptureManager={imageCaptureManager}  />

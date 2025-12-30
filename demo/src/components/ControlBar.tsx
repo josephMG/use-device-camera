@@ -35,6 +35,7 @@ import {
 } from './controls';
 import * as styles from './styles.css';
 import * as debugStyles from './debug.css';
+import { Navigation } from 'swiper/modules';
 
 export default function ControlBar() {
   const trackManager = useMediaTrack();
@@ -102,6 +103,8 @@ export default function ControlBar() {
 
       <Swiper
         direction={swiperDirection}
+        navigation={true}
+        modules={[Navigation]}
         spaceBetween={20}
         slidesPerView={1}
         style={{ width: '100%', height: '100%' }}
@@ -114,7 +117,7 @@ export default function ControlBar() {
          */}
         {controls.map(control => (
           <SwiperSlide key={control.id} style={{ overflowY: 'auto', overflowX: 'hidden' }}>
-            <div style={{ padding: 12 }}>
+            <div style={{ padding: 12, ...(swiperDirection === 'horizontal'?  {paddingLeft: 50, paddingRight: 50 }: {paddingTop: 50, paddingBottom: 50 })}}>
               {control.component}
             </div>
           </SwiperSlide>

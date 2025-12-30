@@ -126,29 +126,44 @@ function Snapshot() {
 
 ### `useCamera()`
 
+
 Returns:
-- `stream`: `MediaStream | null`
-- `devices`: `MediaDeviceInfo[]`
-- `requestPermission(constraints?)`: `Promise<MediaStream | null>`
-- `loadDevices()`: `Promise<MediaDeviceInfo[]>`
-- `cameraPermissionState`: `PermissionState`
-- `audioPermissionState`: `PermissionState`
+
+| Property/Function | Type/Return Type |
+| :--- | :--- |
+| `stream` | `MediaStream \| null` |
+| `devices` | `MediaDeviceInfo[]` |
+| `requestPermission(constraints?)` | `Promise<MediaStream \| null>` |
+| `loadDevices()` | `Promise<MediaDeviceInfo[]>` |
+| `cameraPermissionState` | `PermissionState` |
+| `audioPermissionState` | `PermissionState` |
+
+
 
 ### `useMediaTrack()`
 
 Returns:
-- `trackManager`: `MediaStreamTrack | undefined`
-- `applyConstraints(constraints)`: `Promise<void>`
-- `settings`: `MediaTrackSettings`
-- `capabilities`: `MediaTrackCapabilities`
+
+
+| Property/Function | Type/Return Type |
+| :--- | :--- |
+| `trackManager` | `MediaStreamTrack \| undefined` |
+| `applyConstraints(constraints)` | `Promise<void>` |
+| `settings` | `MediaTrackSettings` |
+| `capabilities` | `MediaTrackCapabilities` |
+
 
 ### `useImageCapture()`
 
 Returns:
-- `imageCaptureManager`: `ImageCapture | undefined`
-- `takePhoto(settings?)`: `Promise<Blob | null>`
-- `photoSettings`: `PhotoSettings`
-- `photoCapabilities`: `PhotoCapabilities`
+
+| Property/Function | Type/Return Type |
+| :--- | :--- |
+| `imageCaptureManager` | `ImageCapture \| undefined` |
+| `takePhoto(settings?)` | `Promise<Blob \| null>` |
+| `photoSettings` | `PhotoSettings` |
+| `photoCapabilities` | `PhotoCapabilities` |
+
 
 ## License
 

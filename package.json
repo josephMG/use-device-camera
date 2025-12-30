@@ -1,6 +1,6 @@
 {
   "name": "use-device-camera",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A React hook for easy camera device integration",
   "author": "JosephMG",
   "license": "MIT",
